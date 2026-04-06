@@ -866,7 +866,7 @@
     <h2>Doe je mee aan de <em>Inspiration Day?</em></h2>
     <p>Vul je gegevens in en je hoort snel van ons. We bevestigen je plek per e-mail.</p>
 
-    <form id="inschrijfform">
+    <form id="inschrijfform" action="https://formspree.io/f/xbdpwrlr" method="POST">
       <div class="form-row">
         <div class="form-group">
           <label for="naam">Naam</label>
@@ -908,31 +908,7 @@
   <div class="footer-copy">Blooming Stories &copy; 2025</div>
 </footer>
 
-<script>
-  document.getElementById('inschrijfform').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const naam      = document.getElementById('naam').value;
-    const bedrijf   = document.getElementById('bedrijf').value;
-    const email     = document.getElementById('email').value;
-    const adres     = document.getElementById('adres').value;
-    const woonplaats= document.getElementById('woonplaats').value;
 
-    const onderwerp = encodeURIComponent('Inschrijving Blooming Stories Inspiration Day Schiedam');
-    const body = encodeURIComponent(
-      'Nieuwe inschrijving voor de Inspiration Day in Schiedam:\n\n' +
-      'Naam: ' + naam + '\n' +
-      'Organisatie: ' + bedrijf + '\n' +
-      'E-mail: ' + email + '\n' +
-      'Adres: ' + adres + '\n' +
-      'Woonplaats: ' + woonplaats
-    );
-
-    window.location.href = 'mailto:liesbeth@bloomingstories.nl?subject=' + onderwerp + '&body=' + body;
-
-    document.getElementById('inschrijfform').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-  });
-</script>
 
 </body>
 </html>
