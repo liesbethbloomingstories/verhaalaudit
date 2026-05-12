@@ -4,911 +4,1211 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hoe sterk is het verhaal van jouw plek? — Blooming Stories</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --royal: #27449c;
-    --portland: #f15f3e;
-    --mint: #b4decd;
-    --mint-light: #d8ede2;
-    --corn: #fed244;
-    --misty: #fee2df;
-    --off-white: #faf8f4;
+    --royal-blue: #1B2B6B;
+    --mint: #A8D8C8;
+    --corn: #F5C842;
+    --orange: #E8581A;
+    --cream: #FAF8F3;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --border: #E2DDD6;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--off-white);
-    color: var(--royal);
-    overflow-x: hidden;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
   }
 
-  /* ── COVER ── */
-  .cover {
-    min-height: 100vh;
-    background: var(--royal);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  header {
+    background: var(--royal-blue);
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--mint); font-style: italic; }
+
+  /* HERO — geen clip-path, gewoon aansluitend */
+  .hero {
+    background: var(--royal-blue);
+    color: white;
+    padding: 2.5rem 2rem 6rem;
+    text-align: center;
     position: relative;
     overflow: hidden;
   }
 
-  .cover::before {
+  .hero::after {
     content: '';
     position: absolute;
-    width: 700px; height: 700px;
-    border-radius: 50%;
-    background: var(--portland);
-    opacity: 0.13;
-    top: -200px; right: -150px;
-    z-index: 0;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--cream);
+    clip-path: ellipse(55% 100% at 50% 100%);
   }
 
-  .cover::after {
-    content: '';
-    position: absolute;
-    width: 450px; height: 450px;
-    border-radius: 50%;
-    background: var(--corn);
-    opacity: 0.10;
-    bottom: -120px; left: 160px;
-    z-index: 0;
-  }
-
-  .cover-left {
-    padding: 80px 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    z-index: 1;
-  }
-
-  .cover-right {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .brand-tag {
-    font-size: 11px;
+  .hero-tag {
+    display: inline-block;
+    background: var(--mint);
+    color: var(--royal-blue);
+    font-size: 0.75rem;
     font-weight: 500;
-    letter-spacing: 3px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--mint);
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 1.1rem;
   }
 
-  .cover-title {
+  .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(40px, 5vw, 66px);
-    font-weight: 900;
-    color: white;
-    line-height: 1.06;
-    margin-top: 56px;
+    font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+    font-weight: 400;
+    line-height: 1.3;
+    max-width: 680px;
+    margin: 0 auto 0.9rem;
   }
 
-  .cover-title em { font-style: italic; color: var(--corn); }
+  .hero h1 em { color: var(--corn); font-style: italic; }
 
-  .cover-subtitle {
-    font-size: 16px;
-    font-weight: 300;
-    color: rgba(255,255,255,0.72);
-    margin-top: 22px;
-    line-height: 1.75;
-    max-width: 380px;
+  .hero p {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
   }
 
-  .cover-pills {
-    margin-top: 44px;
+  /* PROGRESS — aansluitend op hero, zelfde blauwe achtergrond */
+  .progress-bar-wrap {
+    background: var(--cream);
+    padding: 1.25rem 2rem;
+    display: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .progress-bar-wrap.visible { display: block; }
+
+  .progress-inner { max-width: 720px; margin: 0 auto; }
+
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-bottom: 0.45rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .progress-track {
+    height: 3px;
+    background: var(--border);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--corn);
+    border-radius: 100px;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 6rem;
+  }
+
+  /* INTRO */
+  #screen-intro { text-align: center; }
+
+  .intro-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .intro-meta div { text-align: center; }
+
+  .intro-meta strong {
+    display: block;
+    font-size: 2rem;
+    color: var(--royal-blue);
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+  }
+
+  .intro-meta span {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .intro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.7rem;
+    margin-bottom: 1.75rem;
+    text-align: left;
+  }
+
+  .intro-item {
+    background: #EDF5F1;
+    border-radius: 14px;
+    padding: 1.1rem;
     display: flex;
     flex-direction: column;
-    gap: 10px;
   }
 
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.14);
-    padding: 10px 20px;
+  .intro-item .icon { font-size: 1.4rem; margin-bottom: 0.55rem; line-height: 1; }
+
+  .intro-item strong {
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--royal-blue);
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+
+  .intro-item p {
+    font-size: 0.83rem;
+    color: #4a6b5d;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .intro-desc {
+    font-size: 0.93rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto 1.75rem;
+  }
+
+  /* BUTTONS */
+  .btn-primary {
+    background: var(--orange);
+    color: white;
+    border: 2px solid var(--orange);
+    padding: 1rem 2.5rem;
     border-radius: 100px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.82);
-    width: fit-content;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+    text-decoration: none;
   }
 
-  .pill-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--corn);
+  .btn-primary:hover {
+    background: #d04d15;
+    border-color: #d04d15;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(232,88,26,0.3);
+  }
+
+  /* Oranje omlijnd, niet gevuld — voor aanbodblokken */
+  .btn-outline-orange {
+    background: transparent;
+    color: var(--orange);
+    border: 1.5px solid var(--orange);
+    padding: 0.6rem 1.25rem;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.87rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .btn-outline-orange:hover {
+    background: var(--orange);
+    color: white;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--royal-blue);
+    border: 1.5px solid var(--royal-blue);
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { background: var(--royal-blue); color: white; }
+
+  /* SCREENS */
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeUp 0.3s ease both; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* QUESTION */
+  .question-number {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 0.55rem;
+  }
+
+  .question-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--royal-blue);
+    margin-bottom: 0.55rem;
+  }
+
+  .question-title em { font-style: italic; color: var(--orange); }
+
+  .question-sub {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    max-width: 560px;
+  }
+
+  /* INDICATORS */
+  .indicators {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .indicator {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    padding: 0.95rem 1.1rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text);
+    background: white;
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .indicator:hover { border-color: var(--royal-blue); }
+  .indicator.active-red { background: #FEF2F2; border-color: #FECACA; color: #7F1D1D; }
+  .indicator.active-yellow { background: #FFFBEB; border-color: #FDE68A; color: #78350F; }
+  .indicator.active-green { background: #F0FDF4; border-color: #86EFAC; color: #14532D; }
+  .indicator-dot { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* SCORE RESULTAAT */
+  .score-result {
+    display: none;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.4rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .score-result.visible { display: flex; animation: fadeUp 0.25s ease both; }
+
+  .score-result-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    font-weight: 600;
+    line-height: 1;
     flex-shrink: 0;
   }
 
-  .cover-footer { font-size: 12px; color: rgba(255,255,255,0.28); letter-spacing: 1px; }
+  .score-result-number.red { color: #C0392B; }
+  .score-result-number.yellow { color: #C47D0A; }
+  .score-result-number.green { color: #2D7A5F; }
 
-  .visual-blob {
-    width: 340px; height: 340px;
-    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
-    background: linear-gradient(135deg, var(--mint) 0%, var(--mint-light) 55%, white 100%);
+  .score-result-label strong {
+    display: block;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 0.15rem;
+  }
+
+  .score-result-label span {
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* NOTES */
+  .notes-wrap { margin-bottom: 2rem; }
+
+  .notes-wrap label {
+    display: block;
+    font-size: 0.73rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 0.45rem;
+  }
+
+  .notes-wrap textarea {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.91rem;
+    color: var(--text);
+    resize: vertical;
+    min-height: 80px;
+    background: white;
+    transition: border 0.2s;
+    line-height: 1.6;
+  }
+
+  .notes-wrap textarea:focus { outline: none; border-color: var(--royal-blue); }
+  .notes-wrap textarea::placeholder { color: #bbb; }
+
+  .q-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* EMAIL */
+  .email-screen { text-align: center; }
+
+  .email-screen h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--royal-blue);
+    margin-bottom: 0.65rem;
+  }
+
+  .email-screen h2 em { font-style: italic; color: var(--orange); }
+
+  .email-screen > p {
+    color: var(--muted);
+    font-size: 0.92rem;
+    max-width: 420px;
+    margin: 0 auto 1.75rem;
+    line-height: 1.6;
+  }
+
+  .email-form {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.75rem;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .field-row { margin-bottom: 0.9rem; text-align: left; }
+
+  .field-row label {
+    display: block;
+    font-size: 0.73rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .field-row input {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    color: var(--text);
+    background: var(--cream);
+    transition: border 0.2s;
+  }
+
+  .field-row input:focus { outline: none; border-color: var(--royal-blue); background: white; }
+  .email-note { font-size: 0.76rem; color: #bbb; margin-top: 0.7rem; text-align: center; }
+
+  /* RESULT */
+  .result-header {
+    background: var(--royal-blue);
+    color: white;
+    border-radius: 20px;
+    padding: 2.25rem 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .result-score-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    line-height: 1;
+    color: var(--corn);
+    margin-bottom: 0.2rem;
+  }
+
+  .result-score-max { font-size: 0.83rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; margin-top: 0.4rem; }
+
+  .result-label {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    font-size: 0.87rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .result-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--mint);
+    line-height: 1.35;
+  }
+
+  .score-breakdown {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .breakdown-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .breakdown-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    animation: blobFloat 7s ease-in-out infinite;
+    gap: 1rem;
+    margin-bottom: 0.85rem;
   }
 
-  @keyframes blobFloat {
-    0%,100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; transform: translateY(0); }
-    50%      { border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%; transform: translateY(-14px); }
-  }
-
-  .blob-inner { text-align: center; }
-  .blob-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 80px; font-weight: 900;
-    color: var(--royal); line-height: 1;
-  }
-  .blob-label {
-    font-size: 11px; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--royal); font-weight: 500;
-  }
-
-  /* wave transition cover → body */
-  .wave-down {
-    display: block;
-    width: 100%; height: 80px;
-    background: var(--royal);
-    clip-path: ellipse(55% 100% at 50% 0%);
-    margin-bottom: -2px;
-  }
-
-  /* ── SECTIONS GENERAL ── */
-  .section-label {
-    font-size: 11px; letter-spacing: 3px;
-    text-transform: uppercase; color: var(--portland);
-    font-weight: 500; margin-bottom: 16px;
-  }
-
-  /* ── VOOR WIE ── */
-  .voor-wie {
-    padding: 90px 60px 80px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .voor-wie h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 3.5vw, 46px);
-    font-weight: 900; color: var(--royal);
-    line-height: 1.15; margin-bottom: 18px;
-  }
-
-  .voor-wie h2 em { font-style: italic; color: var(--portland); }
-
-  .voor-wie-intro {
-    font-size: 17px; line-height: 1.8;
-    color: var(--royal); max-width: 660px; margin-bottom: 52px;
-  }
-
-  .plekken-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-
-  .plek-card {
-    background: var(--mint-light);
-    border: 1.5px solid var(--mint);
-    border-radius: 28px;
-    padding: 28px 24px;
-    transition: transform 0.3s ease;
-  }
-
-  .plek-card:hover { transform: translateY(-4px); }
-
-  .plek-icon { font-size: 28px; margin-bottom: 14px; display: block; }
-
-  .plek-title {
-    font-size: 11px; letter-spacing: 2.5px;
-    text-transform: uppercase; font-weight: 600;
-    color: var(--royal); margin-bottom: 10px;
-  }
-
-  .plek-desc { font-size: 14px; line-height: 1.72; color: var(--royal); }
-
-  /* soft wave between sections */
-  .organic-divider {
-    width: 100%; overflow: hidden;
-    line-height: 0; margin: 0;
-  }
-
-  .organic-divider svg { display: block; width: 100%; }
-
-  /* ── INTRO ── */
-  .intro-wrap { background: white; }
-
-  .intro {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 80px 60px;
-  }
-
-  .intro h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(26px, 3vw, 40px);
-    font-weight: 700; line-height: 1.22;
-    color: var(--royal); margin-bottom: 24px;
-  }
-
-  .intro p {
-    font-size: 17px; line-height: 1.82;
-    color: var(--royal); max-width: 680px;
-  }
-
-  .intro p + p { margin-top: 16px; }
-
-  .highlight-box {
-    margin-top: 40px;
-    background: var(--misty);
-    border-left: 4px solid var(--portland);
-    padding: 24px 28px;
-    border-radius: 0 24px 24px 0;
-  }
-
-  .highlight-box p {
-    font-family: 'Playfair Display', serif;
-    font-size: 19px; font-style: italic;
-    color: var(--royal); line-height: 1.6;
-  }
-
-  /* ── AUDIT ── */
-  .audit-section { padding: 80px 0 100px; background: white; }
-
-  .audit-inner { max-width: 800px; margin: 0 auto; padding: 0 60px; }
-
-  .audit-intro { margin-bottom: 52px; }
-
-  .audit-intro h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(26px, 3vw, 40px);
-    font-weight: 700; color: var(--royal);
-    line-height: 1.2; margin-bottom: 16px;
-  }
-
-  .audit-intro p { font-size: 16px; line-height: 1.8; color: var(--royal); }
-
-  .question-card {
-    margin-bottom: 28px;
-    padding: 36px 40px;
-    border-radius: 32px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .q1 { background: var(--mint-light); }
-  .q2 { background: var(--misty); }
-  .q3 { background: #fff8e6; }
-  .q4 { background: #eef1fa; }
-  .q5 { background: #f0faf6; }
-
-  .question-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 52px; font-weight: 900;
-    position: absolute; top: 16px; right: 28px;
-    opacity: 0.09; color: var(--royal); line-height: 1;
-  }
-
-  .question-theme {
-    font-size: 10px; letter-spacing: 3px;
-    text-transform: uppercase; font-weight: 600;
-    margin-bottom: 12px; color: var(--royal);
-  }
-
-  .question-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 21px; font-weight: 700;
-    color: var(--royal); line-height: 1.3;
-    margin-bottom: 14px; max-width: 560px;
-  }
-
-  .question-card p {
-    font-size: 15px; line-height: 1.76;
-    color: var(--royal); max-width: 540px; margin-bottom: 18px;
-  }
-
-  .score-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
-
-  .score-item {
-    display: flex; align-items: flex-start; gap: 8px;
-    font-size: 13px; line-height: 1.5; color: var(--royal);
-    flex: 1; min-width: 170px;
-  }
-
-  .score-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
-
-  .reflection-lines {
-    margin-top: 18px;
-    border-top: 1px dashed rgba(39,68,156,0.18);
-    padding-top: 14px;
-  }
-
-  .reflection-label {
-    font-size: 10px; letter-spacing: 2px;
-    text-transform: uppercase; color: rgba(39,68,156,0.32); margin-bottom: 10px;
-  }
-
-  .line-row { height: 26px; border-bottom: 1px solid rgba(39,68,156,0.09); margin-bottom: 4px; }
-
-  /* ── SCORECARD ── */
-  .scorecard-wrap { background: var(--off-white); }
-
-  .scorecard-section {
-    max-width: 900px; margin: 0 auto; padding: 80px 60px;
-  }
-
-  .scorecard-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(24px, 3vw, 36px);
-    font-weight: 700; color: var(--royal); margin-bottom: 12px;
-  }
-
-  .scorecard-section > p {
-    font-size: 16px; color: var(--royal);
-    line-height: 1.7; margin-bottom: 40px; max-width: 560px;
-  }
-
-  .score-profiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-
-  .profile-card { padding: 28px 26px; border-radius: 28px; }
-  .profile-1 { background: var(--mint-light); }
-  .profile-2 { background: #fff3d6; }
-  .profile-3 { background: var(--misty); }
-
-  .profile-score {
-    font-family: 'Playfair Display', serif;
-    font-size: 30px; font-weight: 900; margin-bottom: 6px; color: var(--royal);
-  }
-
-  .profile-title { font-size: 15px; font-weight: 600; color: var(--royal); margin-bottom: 10px; }
-  .profile-desc { font-size: 13.5px; line-height: 1.72; color: var(--royal); }
-
-  /* ── INSPIRATION DAY ── */
-  .dag-section {
-    background: var(--royal);
-    padding: 0 0 100px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .dag-wave-top {
-    display: block; width: 100%;
-    background: var(--off-white);
-    clip-path: ellipse(55% 100% at 50% 0%);
-    height: 80px;
-    margin-bottom: 60px;
-  }
-
-  .dag-section::after {
-    content: '';
-    position: absolute;
-    width: 600px; height: 600px;
-    border-radius: 50%;
-    background: var(--portland);
-    opacity: 0.08;
-    bottom: -200px; right: -150px;
-  }
-
-  .dag-inner {
-    max-width: 1000px; margin: 0 auto;
-    padding: 0 60px;
-    position: relative; z-index: 1;
-  }
-
-  .dag-inner .section-label { color: var(--corn); }
-
-  .dag-inner h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 4vw, 50px);
-    font-weight: 900; color: white; line-height: 1.1; margin-bottom: 20px;
-  }
-
-  .dag-inner h2 em { font-style: italic; color: var(--corn); }
-
-  .dag-intro {
-    font-size: 17px; color: rgba(255,255,255,0.75);
-    line-height: 1.8; max-width: 620px; margin-bottom: 56px;
-  }
-
-  .dag-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: 18px; margin-bottom: 60px;
-  }
-
-  .dag-block {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 28px;
-    padding: 28px 26px;
-  }
-
-  .dag-time {
-    font-size: 11px; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--corn);
-    font-weight: 500; margin-bottom: 10px;
-  }
-
-  .dag-block h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 19px; font-weight: 700; color: white; margin-bottom: 10px;
-  }
-
-  .dag-block p { font-size: 14px; line-height: 1.78; color: rgba(255,255,255,0.65); }
-
-  .dag-details {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 40px;
-  }
-
-  .detail-label {
-    font-size: 10px; letter-spacing: 2.5px;
-    text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 8px;
-  }
-
-  .detail-value { font-size: 16px; font-weight: 500; color: white; }
-
-  .detail-value span {
-    color: var(--corn);
-    font-family: 'Playfair Display', serif;
-    font-size: 24px; font-weight: 700; display: block;
-  }
-
-  /* ── FORMULIER ── */
-  .form-outer { background: var(--off-white); }
-
-  .form-section {
-    max-width: 680px; margin: 0 auto; padding: 80px 60px;
-  }
-
-  .form-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(24px, 3vw, 38px);
-    font-weight: 700; color: var(--royal);
-    line-height: 1.2; margin-bottom: 12px;
-  }
-
-  .form-section h2 em { font-style: italic; color: var(--portland); }
-
-  .form-section > p {
-    font-size: 16px; line-height: 1.8;
-    color: var(--royal); margin-bottom: 40px;
-  }
-
-  .form-row {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 16px; margin-bottom: 0;
-  }
-
-  .form-group {
-    display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px;
-  }
-
-  .form-group label {
-    font-size: 11px; letter-spacing: 1.5px;
-    text-transform: uppercase; font-weight: 500; color: var(--royal);
-  }
-
-  .form-group input {
-    padding: 13px 18px;
-    border: 1.5px solid rgba(39,68,156,0.18);
+  .breakdown-item:last-child { margin-bottom: 0; }
+  .breakdown-name { width: 110px; font-size: 0.87rem; flex-shrink: 0; }
+
+  .breakdown-track {
+    flex: 1;
+    height: 7px;
+    background: var(--border);
     border-radius: 100px;
-    font-size: 15px; font-family: 'DM Sans', sans-serif;
-    color: var(--royal); background: white; outline: none;
-    transition: border-color 0.2s;
+    overflow: hidden;
   }
 
-  .form-group input:focus { border-color: var(--royal); }
+  .breakdown-fill { height: 100%; border-radius: 100px; transition: width 1s ease; }
+  .breakdown-score { width: 20px; font-size: 0.87rem; font-weight: 500; color: var(--royal-blue); text-align: right; flex-shrink: 0; }
 
-  .form-submit {
-    background: var(--portland);
-    color: white; padding: 16px 40px;
-    border-radius: 100px; font-size: 15px; font-weight: 500;
-    border: none; cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    width: 100%; margin-top: 8px;
-    transition: opacity 0.2s;
+  .result-insight {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
   }
 
-  .form-submit:hover { opacity: 0.88; }
-
-  .form-note {
-    font-size: 13px; color: rgba(39,68,156,0.45);
-    text-align: center; margin-top: 12px;
-  }
-
-  .form-success {
-    display: none;
-    background: var(--mint-light);
-    border: 1.5px solid var(--mint);
-    border-radius: 28px;
-    padding: 36px; text-align: center;
-  }
-
-  .form-success h3 {
+  .result-insight h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 22px; font-weight: 700;
-    color: var(--royal); margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: var(--royal-blue);
+    margin-bottom: 0.7rem;
   }
 
-  .form-success p { font-size: 15px; color: var(--royal); line-height: 1.7; }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--royal);
-    padding: 40px 60px;
-    display: flex; justify-content: space-between; align-items: center;
+  .result-insight p {
+    font-size: 0.91rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 0.6rem;
   }
 
-  .footer-brand {
+  .result-insight p:last-child { margin-bottom: 0; }
+
+  .cta-block {
+    background: var(--corn);
+    border-radius: 20px;
+    padding: 2.25rem 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 24px rgba(245,200,66,0.35);
+  }
+
+  .cta-block h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 20px; font-weight: 700; color: white;
+    font-size: 1.4rem;
+    color: var(--royal-blue);
+    margin-bottom: 0.6rem;
   }
 
-  .footer-brand span { color: var(--corn); font-style: italic; }
-  .footer-copy { font-size: 13px; color: rgba(255,255,255,0.3); }
+  .cta-block p {
+    font-size: 0.91rem;
+    color: rgba(27,43,107,0.75);
+    max-width: 390px;
+    margin: 0 auto 1.25rem;
+    line-height: 1.6;
+  }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .cover { grid-template-columns: 1fr; }
-    .cover-right { display: none; }
-    .cover-left { padding: 60px 28px; }
-    .voor-wie { padding: 60px 28px; }
-    .plekken-grid { grid-template-columns: 1fr; }
-    .intro, .audit-inner, .scorecard-section, .dag-inner, .form-section { padding-left: 28px; padding-right: 28px; }
-    .score-profiles { grid-template-columns: 1fr; }
-    .dag-grid { grid-template-columns: 1fr; }
-    .dag-details { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 28px; }
+  .cta-secondary-link {
+    display: block;
+    margin-top: 0.85rem;
+    font-size: 0.84rem;
+    color: var(--royal-blue);
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .inspiration-block {
+    border: 2px solid var(--royal-blue);
+    border-radius: 20px;
+    padding: 1.75rem;
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .inspo-icon { font-size: 1.8rem; flex-shrink: 0; }
+
+  .inspo-content h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--royal-blue);
+    margin-bottom: 0.35rem;
+  }
+
+  .inspo-content p { font-size: 0.86rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.55rem; }
+  .inspo-meta { font-size: 0.79rem; color: var(--royal-blue); font-weight: 500; }
+
+  .aanbod-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+  }
+
+  .aanbod-item.primary {
+    border-color: var(--royal-blue);
+    border-width: 2px;
+  }
+
+  .aanbod-item.self-guided {
+    background: #F9F7F2;
+    border-style: dashed;
+  }
+
+  .aanbod-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+  .aanbod-content h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--royal-blue);
+    margin-bottom: 0.2rem;
+  }
+
+  .aanbod-tag {
+    display: inline-block;
+    font-size: 0.63rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+    margin-bottom: 0.45rem;
+    background: var(--mint);
+    color: var(--royal-blue);
+  }
+
+  .aanbod-tag.live { background: var(--corn); }
+  .aanbod-tag.online { background: #E8E4DC; color: var(--muted); }
+
+  .aanbod-content p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 0.75rem;
+  }
+
+  .aanbod-section-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin: 1.5rem 0 0.75rem;
+  }
+
+  .zelf-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-align: center;
+    margin: 1.25rem 0 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .zelf-label::before, .zelf-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  @media (max-width: 580px) {
+    main { padding: 1.25rem 1.25rem 5rem; }
+    .intro-grid { grid-template-columns: repeat(2, 1fr); }
+    .q-nav { flex-direction: column-reverse; }
+    .q-nav button { width: 100%; }
+    .intro-meta { gap: 1.5rem; }
+  }
+
+  @media (max-width: 360px) {
+    .intro-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<!-- COVER -->
-<section class="cover">
-  <div class="cover-left">
-    
-    <div>
-      <h1 class="cover-title">Hoe sterk is het verhaal van <em>jouw plek?</em></h1>
-      <p class="cover-subtitle">Een praktische verhaalaudit in 5 vragen. Voor iedereen die werkt aan een plek die ertoe doet.</p>
-      <div class="cover-pills">
-        <div class="pill"><span class="pill-dot"></span> Steden en regio's</div>
-        <div class="pill"><span class="pill-dot"></span> Wijken en buurten</div>
-        <div class="pill"><span class="pill-dot"></span> Culturele plekken</div>
-        <div class="pill"><span class="pill-dot"></span> Campussen en hubs</div>
-        <div class="pill"><span class="pill-dot"></span> Publieke ruimte</div>
-        <div class="pill"><span class="pill-dot"></span> Tijdelijke plekken</div>
-        <div class="pill"><span class="pill-dot"></span> Attracties</div>
-      </div>
-    </div>
-    <div class="cover-footer">Verhaalaudit</div>
-  </div>
-  <div class="cover-right">
-    <div class="visual-blob">
-      <div class="blob-inner">
-        <div class="blob-number">5</div>
-        <div class="blob-label">essentiële vragen</div>
-      </div>
-    </div>
-  </div>
-</section>
+<header>
+  <a href="https://bloomingstories.nl" class="logo">Blooming <span>Stories</span></a>
+</header>
 
-<!-- organic wave -->
-<svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px;background:var(--off-white);margin-top:-1px;">
-  <path d="M0,0 C360,80 1080,0 1440,60 L1440,0 Z" fill="#27449c"/>
-</svg>
-
-<!-- VOOR WIE -->
-<section class="voor-wie">
-  <div class="section-label">Voor wie</div>
-  <h2>Welke plekken laten <em>wij</em> bloeien?</h2>
-  <p class="voor-wie-intro">Bij Blooming Stories werken we met plekken op heel verschillende schaalniveaus. Ze staan op een kruispunt en willen iets betekenen. Wij helpen ze ontdekken hoe ze dat verhaal vertellen.</p>
-
-  <div class="plekken-grid">
-    <div class="plek-card">
-      <span class="plek-icon">🏙</span>
-      <div class="plek-title">Steden en regio's</div>
-      <p class="plek-desc">Citymarketing en place branding die gedragen wordt door bewoners en organisaties samen, en die de stad laat zien wie ze werkelijk is.</p>
-    </div>
-    <div class="plek-card">
-      <span class="plek-icon">🏘</span>
-      <div class="plek-title">Wijken en buurten</div>
-      <p class="plek-desc">Plekken in transitie die hun eigen verhaal leren vertellen, van binnenuit en met de mensen die er wonen en werken.</p>
-    </div>
-    <div class="plek-card">
-      <span class="plek-icon">🏛</span>
-      <div class="plek-title">Culturele plekken</div>
-      <p class="plek-desc">Musea, theaters en bibliotheken die een betekenisvolle rol spelen in het leven van de stad en de mensen daarin.</p>
-    </div>
-    <div class="plek-card">
-      <span class="plek-icon">🌿</span>
-      <div class="plek-title">Campussen en hubs</div>
-      <p class="plek-desc">Werkomgevingen en innovatieplekken die een cultuur bouwen waar mensen zich thuis voelen en vanuit hun kracht werken.</p>
-    </div>
-    <div class="plek-card">
-      <span class="plek-icon">☀️</span>
-      <div class="plek-title">Publieke ruimte</div>
-      <p class="plek-desc">Pleinen, parken en waterfronts die mensen uitnodigen om te zijn, te ontmoeten en te verblijven.</p>
-    </div>
-    <div class="plek-card">
-      <span class="plek-icon">✨</span>
-      <div class="plek-title">Tijdelijke plekken</div>
-      <p class="plek-desc">Pop-ups, festivals en herbestemmingen die in korte tijd een krachtige identiteit neerzetten die mensen bijblijft.</p>
-    </div>
-    <div class="plek-card">
-      <span class="plek-icon">🎡</span>
-      <div class="plek-title">Attracties</div>
-      <p class="plek-desc">Pretparken, belevingscentra en toeristische bestemmingen die bezoekers raken en een verhaal meegeven om te bewaren.</p>
-    </div>
-  </div>
-</section>
-
-<!-- wave naar wit -->
-<svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px;background:white;margin-bottom:-1px;">
-  <path d="M0,80 C480,0 960,80 1440,20 L1440,80 Z" fill="#faf8f4"/>
-</svg>
-
-<!-- INTRO -->
-<div class="intro-wrap">
-  <section class="intro">
-    <div class="section-label">Waarom deze audit</div>
-    <h2>Elke plek heeft een verhaal. En jij kunt het vertellen.</h2>
-    <p>Plekken die iets willen betekenen hebben een verhaal nodig dat klopt. Eentje dat vertelt wie ze zijn, wat ze drijft en waarom mensen er willen zijn. Wij helpen je dat verhaal vinden en zichtbaar maken.</p>
-    <p>Deze audit geeft je een eerlijk beeld van waar het verhaal van jouw plek nu staat. Een praktisch vertrekpunt om te bouwen aan iets dat mensen raakt.</p>
-    <div class="highlight-box">
-      <p>"Een sterk verhaal is er een die echt is, die ervaren en gevoeld wordt en leeft in de harten van mensen."</p>
-    </div>
-  </section>
-
-  <!-- AUDIT -->
-  <section class="audit-section">
-    <div class="audit-inner">
-      <div class="audit-intro">
-        <div class="section-label">De verhaalaudit</div>
-        <h2>5 vragen die de kracht van jouw plek meten</h2>
-        <p>Neem per vraag even de tijd. Geef jezelf een score van 1 (nauwelijks) tot 5 (uitstekend) en schrijf op wat er in je opkomt. Jouw verhaal begint met eerlijk kijken.</p>
-      </div>
-
-      <div class="question-card q1">
-        <div class="question-number">01</div>
-        <div class="question-theme">Identiteit</div>
-        <h3>Weet jouw plek wat haar onderscheidt van elke andere plek?</h3>
-        <p>Wat mensen voelen als ze er zijn. Wat maakt deze plek onvervangbaar? Welk gevoel nemen mensen mee als ze weglopen?</p>
-        <div class="score-row">
-          <div class="score-item"><span class="score-icon">🔴</span> 1 tot 2: We hebben wel iets, maar het is vaag of inwisselbaar</div>
-          <div class="score-item"><span class="score-icon">🟡</span> 3: We weten het zelf, maar het is niet scherp verwoord</div>
-          <div class="score-item"><span class="score-icon">🟢</span> 4 tot 5: Helder, gedragen en direct herkenbaar</div>
-        </div>
-        <div class="reflection-lines">
-          <div class="reflection-label">Jouw aantekeningen</div>
-          <div class="line-row"></div><div class="line-row"></div><div class="line-row"></div>
-        </div>
-      </div>
-
-      <div class="question-card q2">
-        <div class="question-number">02</div>
-        <div class="question-theme">Draagvlak</div>
-        <h3>Herkennen de mensen van de plek zichzelf in het verhaal?</h3>
-        <p>Bewoners, ondernemers, bezoekers: zij zijn het verhaal. Voelen zij zich erin thuis? Herkennen ze zichzelf in wat jij over de plek vertelt?</p>
-        <div class="score-row">
-          <div class="score-item"><span class="score-icon">🔴</span> 1 tot 2: Het verhaal leeft nauwelijks op de plek zelf</div>
-          <div class="score-item"><span class="score-icon">🟡</span> 3: Sommige mensen herkennen het, anderen niet</div>
-          <div class="score-item"><span class="score-icon">🟢</span> 4 tot 5: Mensen praten er zelf over, zonder dat je het vraagt</div>
-        </div>
-        <div class="reflection-lines">
-          <div class="reflection-label">Jouw aantekeningen</div>
-          <div class="line-row"></div><div class="line-row"></div><div class="line-row"></div>
-        </div>
-      </div>
-
-      <div class="question-card q3">
-        <div class="question-number">03</div>
-        <div class="question-theme">Consistentie</div>
-        <h3>Klinkt het verhaal overal hetzelfde, van beleid tot bankje?</h3>
-        <p>Van de website tot de bewegwijzering, van de toon van ambtenaren tot de uitstraling van de markt. Een sterk verhaal is zichtbaar, voelbaar en beleefbaar op de plek zelf.</p>
-        <div class="score-row">
-          <div class="score-item"><span class="score-icon">🔴</span> 1 tot 2: Het verhaal en de plek spreken elkaar tegen</div>
-          <div class="score-item"><span class="score-icon">🟡</span> 3: In woorden klopt het, in beleving nog niet</div>
-          <div class="score-item"><span class="score-icon">🟢</span> 4 tot 5: Verhaal en plek versterken elkaar overal</div>
-        </div>
-        <div class="reflection-lines">
-          <div class="reflection-label">Jouw aantekeningen</div>
-          <div class="line-row"></div><div class="line-row"></div><div class="line-row"></div>
-        </div>
-      </div>
-
-      <div class="question-card q4">
-        <div class="question-number">04</div>
-        <div class="question-theme">Richting</div>
-        <h3>Geeft het verhaal richting aan keuzes, ook de lastige?</h3>
-        <p>Een goed verhaal is inspirerend en sturend tegelijk. Het helpt je beslissen welke initiatieven passen en welke richting je op wil. Gebruik jij het verhaal als kompas?</p>
-        <div class="score-row">
-          <div class="score-item"><span class="score-icon">🔴</span> 1 tot 2: Beslissingen worden los van het verhaal gemaakt</div>
-          <div class="score-item"><span class="score-icon">🟡</span> 3: Soms, maar niet structureel</div>
-          <div class="score-item"><span class="score-icon">🟢</span> 4 tot 5: Het verhaal zit in de haarvaten van de aanpak</div>
-        </div>
-        <div class="reflection-lines">
-          <div class="reflection-label">Jouw aantekeningen</div>
-          <div class="line-row"></div><div class="line-row"></div><div class="line-row"></div>
-        </div>
-      </div>
-
-      <div class="question-card q5">
-        <div class="question-number">05</div>
-        <div class="question-theme">Energie</div>
-        <h3>Geeft het verhaal energie, aan jou en aan de mensen om je heen?</h3>
-        <p>Het mooiste teken dat een verhaal klopt? Het inspireert mensen om in beweging te komen. Geeft het verhaal van jouw plek mensen het gevoel dat ze ergens bij horen dat de moeite waard is?</p>
-        <div class="score-row">
-          <div class="score-item"><span class="score-icon">🔴</span> 1 tot 2: Het voelt als werk, niet als beweging</div>
-          <div class="score-item"><span class="score-icon">🟡</span> 3: Bij enkelen wel, maar het is niet breed voelbaar</div>
-          <div class="score-item"><span class="score-icon">🟢</span> 4 tot 5: Het verhaal trekt mensen mee en zet ze in beweging</div>
-        </div>
-        <div class="reflection-lines">
-          <div class="reflection-label">Jouw aantekeningen</div>
-          <div class="line-row"></div><div class="line-row"></div><div class="line-row"></div>
-        </div>
-      </div>
-
-    </div>
-  </section>
+<div class="hero">
+  <div class="hero-tag">Gratis verhaalaudit</div>
+  <h1>Hoe sterk is het verhaal<br><em>van jouw plek?</em></h1>
+  <p>Vijf vragen. Tien minuten. En je weet precies waar het verhaal van jouw plek staat en waar ruimte zit om te groeien.</p>
 </div>
 
-<!-- SCORECARD -->
-<div class="scorecard-wrap">
-  <section class="scorecard-section">
-    <div class="section-label">Jouw uitslag</div>
-    <h2>Wat zegt jouw score?</h2>
-    <p>Tel je vijf scores op. Maximaal 25 punten. Kijk hieronder wat jouw score betekent en wat de mooiste volgende stap is.</p>
-    <div class="score-profiles">
-      <div class="profile-card profile-1">
-        <div class="profile-score">18 tot 25</div>
-        <div class="profile-title">Sterk verhaal 🌱</div>
-        <p class="profile-desc">Je hebt een solide basis. De volgende stap is verdiepen, verankeren en uitdragen zodat het verhaal nog breder gaat leven.</p>
-      </div>
-      <div class="profile-card profile-2">
-        <div class="profile-score">10 tot 17</div>
-        <div class="profile-title">Verhaal in wording 🌿</div>
-        <p class="profile-desc">Er is een kern, maar die is nog niet scherp genoeg of breed gedragen. Tijd om samen te graven naar wat er speelt.</p>
-      </div>
-      <div class="profile-card profile-3">
-        <div class="profile-score">5 tot 9</div>
-        <div class="profile-title">Verhaal gezocht 🌰</div>
-        <p class="profile-desc">De plek heeft potentie maar het verhaal moet nog worden gevonden. Dat is geen probleem. Dat is precies het begin.</p>
-      </div>
+<div class="progress-bar-wrap" id="progressWrap">
+  <div class="progress-inner">
+    <div class="progress-labels">
+      <span id="progressLabel">Vraag 1 van 5</span>
+      <span id="progressPct">20%</span>
     </div>
-    <div style="margin-top: 52px; padding: 40px 44px; background: var(--mint-light); border-radius: 32px;">
-      <p style="font-size: 15px; color: var(--royal); line-height: 1.75; margin-bottom: 20px;">Wil je meer leren over het verhaal van jouw plek?</p>
-      <a href="https://bloomingstories.nl/aanbod" style="display: inline-block; color: var(--royal); font-weight: 500; font-size: 16px; text-decoration: none; border-bottom: 2px solid var(--portland); padding-bottom: 2px;">Lees hier verder &rarr;</a>
-      <p style="font-size: 15px; color: var(--royal); line-height: 1.75; margin-top: 24px;">Of maak kennis op de <strong>Blooming Stories Inspiration Day</strong> in Schiedam op donderdag 28 mei 2026.</p>
-    </div>
-  </section>
-</div>
-<svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px;background:#27449c;margin-bottom:-1px;">
-  <path d="M0,0 C360,80 1080,0 1440,50 L1440,0 Z" fill="#faf8f4"/>
-</svg>
-
-<!-- INSPIRATION DAY -->
-<section class="dag-section">
-  <div class="dag-inner">
-    <div class="section-label">Donderdag 28 mei — Schiedam</div>
-    <h2>Blooming Stories<br><em>Inspiration Day — Schiedam</em></h2>
-    <p class="dag-intro">Schiedam heeft een verhaal dat dieper gaat dan jenever en molens. Kom een middag mee de stad in en ontdek hoe je het verhaal van een plek leert zien, voelen en vertellen. We eindigen op een bijzondere plek die nog wacht op haar verhaal. Jij gaat het bedenken.</p>
-
-    <div class="dag-grid">
-      <div class="dag-block">
-        <div class="dag-time">13:00 — Start</div>
-        <h4>Welkom in Schiedam</h4>
-        <p>We starten niet in een zaal maar op straat. Kennismaking met de stad en met elkaar. Want een verhaal begint altijd met goed kijken.</p>
-      </div>
-      <div class="dag-block">
-        <div class="dag-time">13:30 — Rondleiding</div>
-        <h4>Het verhaal van Schiedam</h4>
-        <p>We lopen samen door de stad. Niet als toerist maar als verhalenzoeker. Wat zie je? Wat voelt deze plek? Waar zit het verhaal dat nog niet zichtbaar is?</p>
-      </div>
-      <div class="dag-block">
-        <div class="dag-time">14:30 — Sessie</div>
-        <h4>Jouw verhaal voor deze plek</h4>
-        <p>We staan stil op een bijzondere plek in Schiedam die wacht op haar verhaal. In kleine groepjes bedenk je wat dit plekje te vertellen heeft en hoe je dat zichtbaar maakt.</p>
-      </div>
-      <div class="dag-block">
-        <div class="dag-time">16:00 — Borrel</div>
-        <h4>Proosten op een toffe locatie</h4>
-        <p>We sluiten af op een locatie in Schiedam waar het verhaal van de plek voelbaar is. Borrel, napraten en nieuwe inzichten delen met mensen die net hetzelfde hebben meegemaakt.</p>
-      </div>
-    </div>
-
-    <div class="dag-details">
-      <div class="detail-item">
-        <div class="detail-label">Datum</div>
-        <div class="detail-value"><span>donderdag</span>28 mei 2026</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Locatie</div>
-        <div class="detail-value">Schiedam<br><small style="color:rgba(255,255,255,0.42); font-size:13px">Exacte plek volgt bij inschrijving</small></div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Investering</div>
-        <div class="detail-value"><span>€ 195</span>per persoon, excl. btw<br><small style="color:rgba(255,255,255,0.42); font-size:13px">incl. rondleiding en borrel</small></div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Aantal plekken</div>
-        <div class="detail-value"><span>max. 16</span>deelnemers<br><small style="color:rgba(255,255,255,0.42); font-size:13px">vol is vol</small></div>
-      </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
     </div>
   </div>
-</section>
-
-<!-- wave naar off-white -->
-<svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:80px;background:#faf8f4;margin-bottom:-1px;">
-  <path d="M0,80 C480,0 960,80 1440,30 L1440,80 Z" fill="#27449c"/>
-</svg>
-
-<!-- FORMULIER -->
-<div class="form-outer">
-  <section class="form-section" id="inschrijven">
-    <div class="section-label">Inschrijven</div>
-    <h2>Doe je mee aan de <em>Inspiration Day?</em></h2>
-    <p>Vul je gegevens in en je hoort snel van ons. We bevestigen je plek per e-mail.</p>
-
-    <form id="inschrijfform" action="https://formspree.io/f/xbdpwrlr" method="POST">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="naam">Naam</label>
-          <input type="text" id="naam" name="naam" placeholder="Jouw naam" required>
-        </div>
-        <div class="form-group">
-          <label for="bedrijf">Organisatie</label>
-          <input type="text" id="bedrijf" name="bedrijf" placeholder="Naam van je organisatie" required>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="email">E-mailadres</label>
-        <input type="email" id="email" name="email" placeholder="jouw@emailadres.nl" required>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="adres">Adres</label>
-          <input type="text" id="adres" name="adres" placeholder="Straat en huisnummer">
-        </div>
-        <div class="form-group">
-          <label for="woonplaats">Plaats</label>
-          <input type="text" id="woonplaats" name="woonplaats" placeholder="Jouw plaats">
-        </div>
-      </div>
-      <button type="submit" class="form-submit">Ja, ik doe mee aan de Inspiration Day</button>
-      <p class="form-note">Na inschrijving ontvang je een bevestiging van Liesbeth.</p>
-    </form>
-
-    <div class="form-success" id="form-success">
-      <h3>Gelukt! Je bent ingeschreven. 🌱</h3>
-      <p>Liesbeth stuurt je zo snel mogelijk een bevestiging met alle details. Tot in Schiedam!</p>
-    </div>
-  </section>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-brand">Blooming <span>Stories</span></div>
-  <div class="footer-copy">Blooming Stories &copy; 2025</div>
-</footer>
 
+<main>
 
+  <!-- INTRO -->
+  <div id="screen-intro" class="screen active">
+    <div class="intro-meta">
+      <div><strong>5</strong><span>vragen</span></div>
+      <div><strong>10</strong><span>minuten</span></div>
+      <div><strong>1</strong><span>helder beeld</span></div>
+    </div>
+    <div class="intro-grid">
+      <div class="intro-item">
+        <div class="icon">🏙</div>
+        <strong>Steden en regio's</strong>
+        <p>Citymarketing en placebranding die de stad laat zien wie ze werkelijk is, gedragen door bewoners en organisaties samen.</p>
+      </div>
+      <div class="intro-item">
+        <div class="icon">🏘</div>
+        <strong>Wijken en buurten</strong>
+        <p>Buurten in transitie, herbestemmingen en pop-ups die hun eigen verhaal leren vertellen, van binnenuit en met de mensen die er wonen en werken.</p>
+      </div>
+      <div class="intro-item">
+        <div class="icon">🏛</div>
+        <strong>Culturele plekken</strong>
+        <p>Musea, theaters en bibliotheken die een betekenisvolle rol spelen in het leven van de stad en de mensen daarin.</p>
+      </div>
+      <div class="intro-item">
+        <div class="icon">🌿</div>
+        <strong>Campussen en hubs</strong>
+        <p>Werkomgevingen en innovatieplekken die een cultuur bouwen waar mensen zich thuis voelen en vanuit hun kracht werken.</p>
+      </div>
+      <div class="intro-item">
+        <div class="icon">☀️</div>
+        <strong>Publieke ruimte</strong>
+        <p>Pleinen, parken, waterfronts en festivals die mensen uitnodigen om te zijn, te ontmoeten en te verblijven.</p>
+      </div>
+      <div class="intro-item">
+        <div class="icon">🎡</div>
+        <strong>Recreatie en leisure parken</strong>
+        <p>Pretparken, belevingscentra en toeristische bestemmingen die bezoekers raken en een verhaal meegeven om te bewaren.</p>
+      </div>
+    </div>
+    <p class="intro-desc">Plekken die iets willen betekenen hebben een verhaal nodig dat klopt. Deze audit geeft je een eerlijk beeld van waar jouw plek nu staat, en een concrete volgende stap.</p>
+    <button class="btn-primary" onclick="startAudit()">Start de verhaalaudit →</button>
+  </div>
 
+  <!-- VRAAG 1 -->
+  <div id="screen-q1" class="screen">
+    <div class="question-number">Vraag 01 / 05 — Identiteit</div>
+    <h2 class="question-title">Weet jouw plek wat haar <em>onderscheidt</em> van elke andere plek?</h2>
+    <p class="question-sub">Wat mensen voelen als ze er zijn. Wat maakt deze plek onvervangbaar? Welk gevoel nemen mensen mee als ze weglopen?</p>
+    <div class="indicators">
+      <div class="indicator" id="ind-q1-1" onclick="setScore('q1',1,'ind-q1-1','red')">
+        <span class="indicator-dot">🔴</span> We hebben wel iets, maar het is vaag of inwisselbaar
+      </div>
+      <div class="indicator" id="ind-q1-2" onclick="setScore('q1',2,'ind-q1-2','yellow')">
+        <span class="indicator-dot">🟡</span> We weten het zelf, maar het is niet scherp verwoord
+      </div>
+      <div class="indicator" id="ind-q1-3" onclick="setScore('q1',3,'ind-q1-3','green')">
+        <span class="indicator-dot">🟢</span> Helder, gedragen en direct herkenbaar
+      </div>
+    </div>
+    <div class="score-result" id="result-q1">
+      <div class="score-result-number" id="num-q1">—</div>
+      <div class="score-result-label"><strong>Jouw score</strong><span id="meaning-q1"></span></div>
+    </div>
+    <div class="notes-wrap">
+      <label>Jouw aantekening (optioneel)</label>
+      <textarea id="note-q1" placeholder="Wat schiet je te binnen als je aan deze vraag denkt?"></textarea>
+    </div>
+    <div class="q-nav">
+      <button class="btn-secondary" onclick="goBack('screen-intro')">← Terug</button>
+      <button class="btn-primary" onclick="nextQuestion('screen-q1','screen-q2',1)">Volgende →</button>
+    </div>
+  </div>
+
+  <!-- VRAAG 2 -->
+  <div id="screen-q2" class="screen">
+    <div class="question-number">Vraag 02 / 05 — Draagvlak</div>
+    <h2 class="question-title">Herkennen de <em>mensen van de plek</em> zichzelf in het verhaal?</h2>
+    <p class="question-sub">Bewoners, ondernemers, bezoekers: zij zijn het verhaal. Voelen zij zich erin thuis? Herkennen ze zichzelf in wat jij over de plek vertelt?</p>
+    <div class="indicators">
+      <div class="indicator" id="ind-q2-1" onclick="setScore('q2',1,'ind-q2-1','red')">
+        <span class="indicator-dot">🔴</span> Het verhaal leeft nauwelijks op de plek zelf
+      </div>
+      <div class="indicator" id="ind-q2-2" onclick="setScore('q2',2,'ind-q2-2','yellow')">
+        <span class="indicator-dot">🟡</span> Sommige mensen herkennen het, anderen niet
+      </div>
+      <div class="indicator" id="ind-q2-3" onclick="setScore('q2',3,'ind-q2-3','green')">
+        <span class="indicator-dot">🟢</span> Mensen praten er zelf over, zonder dat je het vraagt
+      </div>
+    </div>
+    <div class="score-result" id="result-q2">
+      <div class="score-result-number" id="num-q2">—</div>
+      <div class="score-result-label"><strong>Jouw score</strong><span id="meaning-q2"></span></div>
+    </div>
+    <div class="notes-wrap">
+      <label>Jouw aantekening (optioneel)</label>
+      <textarea id="note-q2" placeholder="Wie herkent het verhaal, en wie niet?"></textarea>
+    </div>
+    <div class="q-nav">
+      <button class="btn-secondary" onclick="goBack('screen-q1')">← Terug</button>
+      <button class="btn-primary" onclick="nextQuestion('screen-q2','screen-q3',2)">Volgende →</button>
+    </div>
+  </div>
+
+  <!-- VRAAG 3 -->
+  <div id="screen-q3" class="screen">
+    <div class="question-number">Vraag 03 / 05 — Consistentie</div>
+    <h2 class="question-title">Klinkt het verhaal overal hetzelfde, <em>van beleid tot bankje?</em></h2>
+    <p class="question-sub">Van de website tot de bewegwijzering, van de toon van ambtenaren tot de uitstraling van de markt. Een sterk verhaal is zichtbaar, voelbaar en beleefbaar op de plek zelf.</p>
+    <div class="indicators">
+      <div class="indicator" id="ind-q3-1" onclick="setScore('q3',1,'ind-q3-1','red')">
+        <span class="indicator-dot">🔴</span> Het verhaal en de plek spreken elkaar tegen
+      </div>
+      <div class="indicator" id="ind-q3-2" onclick="setScore('q3',2,'ind-q3-2','yellow')">
+        <span class="indicator-dot">🟡</span> In woorden klopt het, in beleving nog niet
+      </div>
+      <div class="indicator" id="ind-q3-3" onclick="setScore('q3',3,'ind-q3-3','green')">
+        <span class="indicator-dot">🟢</span> Verhaal en plek versterken elkaar overal
+      </div>
+    </div>
+    <div class="score-result" id="result-q3">
+      <div class="score-result-number" id="num-q3">—</div>
+      <div class="score-result-label"><strong>Jouw score</strong><span id="meaning-q3"></span></div>
+    </div>
+    <div class="notes-wrap">
+      <label>Jouw aantekening (optioneel)</label>
+      <textarea id="note-q3" placeholder="Waar loopt het verhaal stuk in de praktijk?"></textarea>
+    </div>
+    <div class="q-nav">
+      <button class="btn-secondary" onclick="goBack('screen-q2')">← Terug</button>
+      <button class="btn-primary" onclick="nextQuestion('screen-q3','screen-q4',3)">Volgende →</button>
+    </div>
+  </div>
+
+  <!-- VRAAG 4 -->
+  <div id="screen-q4" class="screen">
+    <div class="question-number">Vraag 04 / 05 — Richting</div>
+    <h2 class="question-title">Geeft het verhaal <em>richting aan keuzes,</em> ook de lastige?</h2>
+    <p class="question-sub">Een goed verhaal is inspirerend en sturend tegelijk. Het helpt je beslissen welke initiatieven passen en welke richting je op wil. Gebruik jij het verhaal als kompas?</p>
+    <div class="indicators">
+      <div class="indicator" id="ind-q4-1" onclick="setScore('q4',1,'ind-q4-1','red')">
+        <span class="indicator-dot">🔴</span> Beslissingen worden los van het verhaal gemaakt
+      </div>
+      <div class="indicator" id="ind-q4-2" onclick="setScore('q4',2,'ind-q4-2','yellow')">
+        <span class="indicator-dot">🟡</span> Soms, maar niet structureel
+      </div>
+      <div class="indicator" id="ind-q4-3" onclick="setScore('q4',3,'ind-q4-3','green')">
+        <span class="indicator-dot">🟢</span> Het verhaal zit in de haarvaten van de aanpak
+      </div>
+    </div>
+    <div class="score-result" id="result-q4">
+      <div class="score-result-number" id="num-q4">—</div>
+      <div class="score-result-label"><strong>Jouw score</strong><span id="meaning-q4"></span></div>
+    </div>
+    <div class="notes-wrap">
+      <label>Jouw aantekening (optioneel)</label>
+      <textarea id="note-q4" placeholder="Wanneer hielp het verhaal je bij een keuze?"></textarea>
+    </div>
+    <div class="q-nav">
+      <button class="btn-secondary" onclick="goBack('screen-q3')">← Terug</button>
+      <button class="btn-primary" onclick="nextQuestion('screen-q4','screen-q5',4)">Volgende →</button>
+    </div>
+  </div>
+
+  <!-- VRAAG 5 -->
+  <div id="screen-q5" class="screen">
+    <div class="question-number">Vraag 05 / 05 — Energie</div>
+    <h2 class="question-title">Geeft het verhaal <em>energie,</em> aan jou en aan de mensen om je heen?</h2>
+    <p class="question-sub">Het mooiste teken dat een verhaal klopt? Het inspireert mensen om in beweging te komen. Geeft het verhaal van jouw plek mensen het gevoel dat ze ergens bij horen dat de moeite waard is?</p>
+    <div class="indicators">
+      <div class="indicator" id="ind-q5-1" onclick="setScore('q5',1,'ind-q5-1','red')">
+        <span class="indicator-dot">🔴</span> Het voelt als werk, niet als beweging
+      </div>
+      <div class="indicator" id="ind-q5-2" onclick="setScore('q5',2,'ind-q5-2','yellow')">
+        <span class="indicator-dot">🟡</span> Bij enkelen wel, maar het is niet breed voelbaar
+      </div>
+      <div class="indicator" id="ind-q5-3" onclick="setScore('q5',3,'ind-q5-3','green')">
+        <span class="indicator-dot">🟢</span> Het verhaal trekt mensen mee en zet ze in beweging
+      </div>
+    </div>
+    <div class="score-result" id="result-q5">
+      <div class="score-result-number" id="num-q5">—</div>
+      <div class="score-result-label"><strong>Jouw score</strong><span id="meaning-q5"></span></div>
+    </div>
+    <div class="notes-wrap">
+      <label>Jouw aantekening (optioneel)</label>
+      <textarea id="note-q5" placeholder="Wie raakt er enthousiast van het verhaal van jullie plek?"></textarea>
+    </div>
+    <div class="q-nav">
+      <button class="btn-secondary" onclick="goBack('screen-q4')">← Terug</button>
+      <button class="btn-primary" onclick="nextQuestion('screen-q5','screen-email',5)">Naar mijn uitslag →</button>
+    </div>
+  </div>
+
+  <!-- EMAIL -->
+  <div id="screen-email" class="screen email-screen">
+    <div style="font-size:2.5rem;margin-bottom:1rem;">🌱</div>
+    <h2>Bijna klaar. <em>Waar sturen we je uitslag naartoe?</em></h2>
+    <p>Je krijgt je persoonlijke uitslag direct in je inbox, plus een concrete tip die past bij jouw score.</p>
+    <div class="email-form">
+      <div class="field-row">
+        <label>Naam</label>
+        <input type="text" id="input-naam" placeholder="Jouw naam">
+      </div>
+      <div class="field-row">
+        <label>E-mailadres</label>
+        <input type="email" id="input-email" placeholder="jouw@email.nl">
+      </div>
+      <div class="field-row">
+        <label>Organisatie (optioneel)</label>
+        <input type="text" id="input-org" placeholder="Gemeente, BIZ, museum...">
+      </div>
+      <button class="btn-primary" style="width:100%;margin-top:0.5rem;" onclick="submitEmail()">Stuur me mijn uitslag →</button>
+      <p class="email-note">Geen spam. Alleen jouw uitslag en af en toe iets waardevols van Blooming Stories.</p>
+    </div>
+    <button onclick="showResults()" style="background:none;border:none;color:var(--muted);font-size:0.84rem;cursor:pointer;margin-top:1rem;text-decoration:underline;">Verder zonder e-mailadres</button>
+  </div>
+
+  <!-- RESULTAAT -->
+  <div id="screen-result" class="screen">
+    <div class="result-header">
+      <div class="result-score-big" id="result-total">—</div>
+      <div class="result-score-max">van 15 punten</div>
+      <div class="result-label" id="result-label-tag">—</div>
+      <div class="result-tagline" id="result-tagline">—</div>
+    </div>
+
+    <div class="score-breakdown">
+      <div class="breakdown-title">Jouw scores per dimensie</div>
+      <div class="breakdown-item">
+        <div class="breakdown-name">Identiteit</div>
+        <div class="breakdown-track"><div class="breakdown-fill" id="bar-q1" style="width:0%"></div></div>
+        <div class="breakdown-score" id="bscore-q1">—</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-name">Draagvlak</div>
+        <div class="breakdown-track"><div class="breakdown-fill" id="bar-q2" style="width:0%"></div></div>
+        <div class="breakdown-score" id="bscore-q2">—</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-name">Consistentie</div>
+        <div class="breakdown-track"><div class="breakdown-fill" id="bar-q3" style="width:0%"></div></div>
+        <div class="breakdown-score" id="bscore-q3">—</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-name">Richting</div>
+        <div class="breakdown-track"><div class="breakdown-fill" id="bar-q4" style="width:0%"></div></div>
+        <div class="breakdown-score" id="bscore-q4">—</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-name">Energie</div>
+        <div class="breakdown-track"><div class="breakdown-fill" id="bar-q5" style="width:0%"></div></div>
+        <div class="breakdown-score" id="bscore-q5">—</div>
+      </div>
+    </div>
+
+    <div class="result-insight">
+      <h3 id="insight-title">—</h3>
+      <p id="insight-body1">—</p>
+      <p id="insight-body2">—</p>
+    </div>
+
+    <!-- Primaire CTA: contact -->
+    <div class="cta-block" id="cta-primary">
+      <h3 id="cta-title">—</h3>
+      <p id="cta-body">—</p>
+      <a href="#" class="btn-primary" id="cta-btn">—</a>
+    </div>
+
+    <!-- Aanbod blokken, per score gevuld via JS -->
+    <div id="aanbod-blokken"></div>
+
+  </div>
+
+</main>
+
+<script>
+  const scores = { q1: null, q2: null, q3: null, q4: null, q5: null };
+
+  const meanings = { 1: 'Nog veel te winnen', 2: 'In ontwikkeling', 3: 'Uitstekend' };
+  const barColors = { 1: '#C0392B', 2: '#F39C12', 3: '#2D7A5F' };
+
+  function show(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function startAudit() {
+    document.getElementById('progressWrap').classList.add('visible');
+    updateProgress(1);
+    show('screen-q1');
+  }
+
+  function updateProgress(q) {
+    const pct = Math.round((q / 5) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = 'Vraag ' + q + ' van 5';
+    document.getElementById('progressPct').textContent = pct + '%';
+  }
+
+  function setScore(q, val, indId, color) {
+    scores[q] = val;
+
+    ['1','2','3'].forEach(i => {
+      const el = document.getElementById('ind-' + q + '-' + i);
+      if (el) el.className = 'indicator';
+    });
+
+    document.getElementById(indId).className = 'indicator active-' + color;
+
+    const numEl = document.getElementById('num-' + q);
+    numEl.textContent = val;
+    numEl.className = 'score-result-number ' + color;
+    document.getElementById('meaning-' + q).textContent = meanings[val] || '';
+    document.getElementById('result-' + q).classList.add('visible');
+  }
+
+  function goBack(targetId) {
+    show(targetId);
+    if (targetId === 'screen-intro') {
+      document.getElementById('progressWrap').classList.remove('visible');
+    }
+  }
+
+  function nextQuestion(current, next, qNum) {
+    if (scores['q' + qNum] === null) {
+      alert('Kies eerst een optie voordat je verdergaat.');
+      return;
+    }
+    if (next === 'screen-email') {
+      document.getElementById('progressWrap').classList.remove('visible');
+    } else {
+      updateProgress(qNum + 1);
+    }
+    show(next);
+  }
+
+  async function submitEmail() {
+    const naam = document.getElementById('input-naam').value.trim();
+    const email = document.getElementById('input-email').value.trim();
+    const org = document.getElementById('input-org').value.trim();
+
+    if (!email || !email.includes('@')) {
+      alert('Vul een geldig e-mailadres in.');
+      return;
+    }
+
+    const total = Object.values(scores).reduce((a, b) => a + (b || 0), 0);
+    const scoreRange = total >= 11 ? 'Sterk verhaal' : total >= 7 ? 'Verhaal in wording' : 'Verhaal gezocht';
+
+    const btn = document.querySelector('#screen-email .btn-primary');
+    btn.textContent = 'Even geduld...';
+    btn.disabled = true;
+
+    try {
+      await fetch('https://formspree.io/f/maqvvkjq', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          naam, email,
+          organisatie: org || '—',
+          totaalscore: total + ' / 15',
+          scorerange: scoreRange,
+          scores: `Identiteit: ${scores.q1} | Draagvlak: ${scores.q2} | Consistentie: ${scores.q3} | Richting: ${scores.q4} | Energie: ${scores.q5}`,
+          notities: ['note-q1','note-q2','note-q3','note-q4','note-q5']
+            .map(id => document.getElementById(id).value).filter(Boolean).join(' | ') || '—'
+        })
+      });
+    } catch(e) {}
+
+    showResults();
+  }
+
+  function aanbodBlok(icon, tag, tagType, titel, omschrijving, btnTekst, btnHref, primary = false, selfGuided = false) {
+    return `
+    <div class="aanbod-item ${primary ? 'primary' : ''} ${selfGuided ? 'self-guided' : ''}">
+      <div class="aanbod-icon">${icon}</div>
+      <div class="aanbod-content">
+        <span class="aanbod-tag ${tagType}">${tag}</span>
+        <h4>${titel}</h4>
+        <p>${omschrijving}</p>
+        <a href="${btnHref}" class="btn-outline-orange" style="display:inline-block;">${btnTekst}</a>
+      </div>
+    </div>`;
+  }
+
+  function showResults() {
+    const total = Object.values(scores).reduce((a, b) => a + (b || 0), 0);
+    document.getElementById('result-total').textContent = total;
+
+    ['q1','q2','q3','q4','q5'].forEach(q => {
+      const s = scores[q] || 0;
+      const bar = document.getElementById('bar-' + q);
+      bar.style.width = '0%';
+      bar.style.background = barColors[s] || '#ccc';
+      setTimeout(() => bar.style.width = (s / 3) * 100 + '%', 100);
+      document.getElementById('bscore-' + q).textContent = s;
+    });
+
+    let label, tagline, insightTitle, insightBody1, insightBody2, ctaTitle, ctaBody, ctaBtn, ctaBtnHref, aanbodHTML;
+
+    if (total >= 11) {
+      // HOOG
+      label = 'Sterk verhaal 🌱';
+      tagline = 'Je plek bloeit. Nu gaat het over zichtbaar maken en uitdragen.';
+      insightTitle = 'Er is een solide basis. Wat nu?';
+      insightBody1 = 'Jouw plek heeft een verhaal dat klopt. Dat is zeldzamer dan je denkt. De meeste plekken zitten nog in de fase van zoeken. Jij zit in de fase van uitdragen.';
+      insightBody2 = 'De volgende stap is zorgen dat het verhaal overal zichtbaar en voelbaar wordt. Niet alleen in woorden, maar in programmering, beleving en stadsdressing. Dat is het verschil tussen een verhaal dat je hebt en een verhaal dat leeft.';
+      ctaTitle = 'Laten we samen een sterk verhaal maken dat klopt?';
+      ctaBody = 'Wil je weten welke stap het meeste oplevert voor jouw plek? Plan een vrijblijvend gesprek van 30 minuten.';
+      ctaBtn = 'Plan een gesprek →';
+      ctaBtnHref = 'https://bloomingstories.nl/contact';
+      aanbodHTML = `
+        <p class="aanbod-section-label">Op basis van jouw score</p>
+        ${aanbodBlok('🎨', 'Maatwerk traject', '', 'Blooming Concept Studio', 'Wij vertalen jullie merkverhaal naar de praktijk, het hele jaar door. Creatieve concepten voor placemaking, routes, activaties en programmering — zodat het verhaal overal zichtbaar en voelbaar wordt.', 'Meer over Concept Studio →', 'https://bloomingstories.nl/blooming-concept-studio', true)}
+        <div class="zelf-label">of liever zelf aan de slag?</div>
+        ${aanbodBlok('💻', 'Online training', 'online', 'Bloeiende Plekken', 'Een online training die je zelfstandig doorloopt. In 5 weken leer je hoe je een sterk verhaal verankert en laat doorleven in alles wat je doet. Op jouw tempo.', 'Bekijk de training →', 'https://bloomingstories.nl/bloeiende-plekken', false, true)}`;
+
+    } else if (total >= 7) {
+      // MIDDEN
+      label = 'Verhaal in wording 🌿';
+      tagline = 'Er is een kern. Nu moet die scherper en breder gedragen worden.';
+      insightTitle = 'Je voelt dat er iets is. Maar het klopt nog niet helemaal.';
+      insightBody1 = 'Dat herkennen we. Veel plekken hebben een gevoel, een intuïtie over wie ze zijn, maar dat is nog niet scherp genoeg verwoord om anderen mee te nemen. Of het verhaal leeft bij een kleine groep, maar bereikt de buitenwereld niet.';
+      insightBody2 = 'Dat is geen probleem. Dat is precies het moment waarop het interessant wordt. Want de kern is er al. Die moet je nu naar boven halen, niet verzinnen.';
+      ctaTitle = 'Laten we samen een sterk verhaal maken dat klopt?';
+      ctaBody = 'Wil je weten welke stap het meeste oplevert voor jouw plek? Plan een vrijblijvend gesprek van 30 minuten.';
+      ctaBtn = 'Plan een gesprek →';
+      ctaBtnHref = 'https://bloomingstories.nl/contact';
+      aanbodHTML = `
+        <p class="aanbod-section-label">Op basis van jouw score</p>
+        ${aanbodBlok('🎓', 'Live training', 'live', 'Blooming Training: placebranding & placemaking', 'Je ontdekt hoe je verhalen vertaalt naar jouw gebied en de dagelijkse beleving. Je gaat naar huis met frisse ideeën en concrete handvatten om jouw gebied sterker en herkenbaarder te maken.', 'Meer over de training →', 'https://bloomingstories.nl/blooming-training-placebranding-and-placemaking', true)}
+        <div class="zelf-label">of liever zelf aan de slag?</div>
+        ${aanbodBlok('💻', 'Online training', 'online', 'Bloeiende Plekken', 'Een online training die je zelfstandig doorloopt. In 5 weken ontdek je wat jouw plek écht in zich heeft en leer je het verhaal zo te verwoorden dat het klopt, draagt en mensen in beweging zet. Op jouw tempo.', 'Bekijk de training →', 'https://bloomingstories.nl/bloeiende-plekken', false, true)}`;
+
+    } else {
+      // LAAG
+      label = 'Verhaal gezocht 🌰';
+      tagline = 'De plek heeft potentie. Het verhaal moet nog worden gevonden.';
+      insightTitle = 'Geen verhaal is ook een startpunt.';
+      insightBody1 = 'De plek bestaat. Mensen zijn er, dingen gebeuren er, er is een geschiedenis. Maar het verhaal dat dat alles samenhoudt, is er nog niet. Of het is er wel, maar niemand heeft het nog gezien.';
+      insightBody2 = 'Dat is eigenlijk het mooiste vertrekpunt. Want je begint zonder ballast. Zonder een verhaal dat al jarenlang niet meer klopt maar waar iedereen aan gewend is. Je kunt nu iets bouwen dat écht van binnenuit komt.';
+      ctaTitle = 'Laten we samen een sterk verhaal maken dat klopt?';
+      ctaBody = 'Wil je weten welke stap het meeste oplevert voor jouw plek? Plan een vrijblijvend gesprek van 30 minuten.';
+      ctaBtn = 'Plan een gesprek →';
+      ctaBtnHref = 'https://bloomingstories.nl/contact';
+      aanbodHTML = `
+        <p class="aanbod-section-label">Op basis van jouw score</p>
+        ${aanbodBlok('🌿', 'Maatwerk traject', '', 'Blooming Experience: traject op maat', 'Samen halen we de kern van jouw gebied naar boven: visie, missie en identiteit. Van daaruit bouwen we een merkverhaal dat gedragen wordt door medewerkers, inwoners en partners. Van binnen naar buiten.', 'Meer over het traject →', 'https://bloomingstories.nl/blooming-stories-for-blooming-places', true)}
+        ${aanbodBlok('🎓', 'Live training', 'live', 'Blooming Training: placebranding & placemaking', 'Je ontdekt hoe je verhalen vertaalt naar jouw gebied en de dagelijkse beleving, en gaat naar huis met frisse ideeën en concrete handvatten.', 'Meer over de training →', 'https://bloomingstories.nl/blooming-training-placebranding-and-placemaking')}
+        <div class="zelf-label">of liever zelf aan de slag?</div>
+        ${aanbodBlok('💻', 'Online training', 'online', 'Bloeiende Plekken', 'Een online training die je zelfstandig doorloopt. In 5 weken ontdek je wat jouw plek écht in zich heeft en leer je het verhaal zo te verwoorden dat het klopt, draagt en mensen in beweging zet. Op jouw tempo.', 'Bekijk de training →', 'https://bloomingstories.nl/bloeiende-plekken', false, true)}`;
+    }
+
+    document.getElementById('result-label-tag').textContent = label;
+    document.getElementById('result-tagline').textContent = tagline;
+    document.getElementById('insight-title').textContent = insightTitle;
+    document.getElementById('insight-body1').textContent = insightBody1;
+    document.getElementById('insight-body2').textContent = insightBody2;
+    document.getElementById('cta-title').textContent = ctaTitle;
+    document.getElementById('cta-body').textContent = ctaBody;
+    document.getElementById('cta-btn').textContent = ctaBtn;
+    document.getElementById('cta-btn').href = ctaBtnHref;
+    document.getElementById('aanbod-blokken').innerHTML = aanbodHTML;
+
+    show('screen-result');
+  }
+</script>
 </body>
 </html>
